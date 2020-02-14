@@ -1,4 +1,5 @@
 *java.io.File*
+
 ```java
 File(String pathname);
 
@@ -91,5 +92,7 @@ boolean mkdirs();
 Path toPath();
 
 // 从该文件中创建一个 `Path` 对象
+
+boolean createNewFile();
 
 ```
