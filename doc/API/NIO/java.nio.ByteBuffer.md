@@ -1,4 +1,5 @@
 *java.nio.ByteBuffer*
+
 ```java
 byte get();
 
@@ -68,4 +69,6 @@ CharBuffer asCharBuffer();
 
 // 构建字符缓冲区，它是对这个缓冲区的包装。对该字符缓冲区的变更将在这个缓冲区中反映出来，但是该字符缓冲区有自己的位置、界限和标记
 
+// 生成一个新的 ByteBuffer
+ByteBuffer slice();
 ```

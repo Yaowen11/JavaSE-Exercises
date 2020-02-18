@@ -1,4 +1,4 @@
-package se.generic.generator;
+package se.generic.generation;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;

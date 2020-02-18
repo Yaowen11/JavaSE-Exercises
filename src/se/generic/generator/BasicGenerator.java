@@ -1,7 +1,8 @@
-package se.generic;
+package se.generic.generator;
 
-import se.generic.generator.Coffee;
-import se.generic.generator.Generator;
+import se.generic.Fibonacci;
+import se.generic.generation.Coffee;
+import se.generic.generation.Generator;
 import java.lang.reflect.InvocationTargetException;
 
 /**

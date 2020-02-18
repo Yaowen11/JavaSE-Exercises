@@ -1,7 +1,7 @@
 package se.generic;
 
-import se.generic.generator.Generator;
-import se.generic.generator.Generators;
+import se.generic.generation.Generator;
+import se.generic.generation.Generators;
 
 import java.util.*;
 

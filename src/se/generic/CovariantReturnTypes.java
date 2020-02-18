@@ -3,6 +3,10 @@ package se.generic;
 class Base {}
 class Derived extends Base{}
 interface OrdinaryGetter {
+    /**
+     * get
+     * @return
+     */
     Base get();
 }
 interface DerivedGetter extends OrdinaryGetter {

@@ -1,6 +1,6 @@
 package se.generic.store;
 
-import se.generic.generator.Generator;
+import se.generic.generation.Generator;
 
 import java.util.Random;
 

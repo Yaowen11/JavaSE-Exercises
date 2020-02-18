@@ -1,6 +1,6 @@
 package se.generic.store;
 
-import se.generic.generator.Generators;
+import se.generic.generation.Generators;
 
 import java.util.ArrayList;
 

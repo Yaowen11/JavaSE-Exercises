@@ -1,4 +1,4 @@
-package se.generic.generator;
+package se.generic.generation;
 
 /**
  * @author zhangyaowen
