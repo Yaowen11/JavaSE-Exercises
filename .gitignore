@@ -23,3 +23,8 @@
 hs_err_pid*
 .idea
 *.iml
+*.txt
+*.gz
+*.data
+*.tmp
+*.out

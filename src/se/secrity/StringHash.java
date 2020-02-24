@@ -35,7 +35,7 @@ public class StringHash extends BaseClass {
     private static String dumpStringHash(byte[] origin, String algorithm) throws NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
         byte[] hashString = messageDigest.digest(origin);
-        StringBuilder hBuilder = new StringBuilder("");
+        StringBuilder hBuilder = new StringBuilder();
         int n;
         for (byte b : hashString) {
             n = b;
