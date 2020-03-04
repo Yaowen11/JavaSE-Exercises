@@ -1,7 +1,5 @@
 package se.base;
 
-import jdbc.mysql.CityCurd;
-
 class ClassOption extends BaseClass {
 
     protected Integer size;

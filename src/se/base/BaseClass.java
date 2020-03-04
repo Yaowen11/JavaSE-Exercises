@@ -1,6 +1,5 @@
 package se.base;
 
-import javax.print.attribute.IntegerSyntax;
 
 /**
  * @author zhangyaowen
