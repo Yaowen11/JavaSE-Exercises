@@ -8,15 +8,7 @@ import se.base.BaseClass;
 /**
  * @author zhangyaowen
  */
-public class StringHash extends BaseClass {
-
-    StringHash() {
-        super();
-    }
-
-    public void change() {
-        this.getSale();
-    }
+public class StringHash {
 
     public static void main(String[] args) {
         String md5Hash123456 = "e10adc3949ba59abbe56e057f20f883e";
