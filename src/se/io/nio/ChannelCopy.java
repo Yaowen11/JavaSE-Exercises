@@ -34,6 +34,5 @@ public class ChannelCopy {
         }
         FileChannel in = new FileInputStream(args[0]).getChannel();
         FileChannel out = new FileOutputStream(args[1]).getChannel();
-
     }
 }

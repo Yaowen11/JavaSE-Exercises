@@ -127,8 +127,8 @@ public class ByteBufferView {
         }
     }
     public static void main(String[] args) {
-       viewBuffers();
+//       viewBuffers();
        changeBufferOrder();
-       usingBuffers();
+//       usingBuffers();
     }
 }

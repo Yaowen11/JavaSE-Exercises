@@ -3,6 +3,7 @@ package se.io.nio.socket.echo;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.StandardCharsets;
 
 class Process implements Runnable {
     public static final int SIZE = 1024;
@@ -20,18 +21,14 @@ class Process implements Runnable {
     @Override
     public void run() {
         try{
-            int readLength;
-            while ((readLength = (socketChannel.read(byteBuffer))) != -1) {
+            while ((socketChannel.read(byteBuffer)) != -1) {
                 byteBuffer.flip();
-                byte[] bytes = new byte[readLength];
-                for (int i = 0; i < readLength; i++) {
-                    bytes[i] = byteBuffer.get();
-                }
-                stringBuilder.append(new String(bytes));
+                stringBuilder.append(StandardCharsets.UTF_8.decode(byteBuffer).toString());
                 byteBuffer.clear();
             }
             System.out.println(stringBuilder.toString());
-            socketChannel.write(byteBuffer.put(stringBuilder.toString().getBytes()));
+            byteBuffer.put(stringBuilder.toString().getBytes());
+            socketChannel.write(byteBuffer);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -3,7 +3,9 @@ package se.io.nio.socket.echo;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
+import java.nio.channels.Channels;
 import java.nio.channels.SocketChannel;
+import java.nio.channels.WritableByteChannel;
 import java.nio.charset.StandardCharsets;
 
 class SocketClient implements Runnable {
@@ -25,6 +27,7 @@ class SocketClient implements Runnable {
             send(send);
             buffer.clear();
             receive();
+            client.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -35,13 +38,9 @@ class SocketClient implements Runnable {
     }
 
     public void receive() throws IOException {
-        int readLength;
-        while ((readLength = client.read(buffer)) != -1) {
-            byte[] bytes = new byte[readLength];
-            for (int i = 0; i < readLength; i++) {
-                bytes[i] = buffer.get();
-            }
-            System.out.println(new String(bytes));
+        WritableByteChannel out = Channels.newChannel(System.out);
+        while ((client.read(buffer)) != -1) {
+            out.write(buffer);
         }
     }
 }

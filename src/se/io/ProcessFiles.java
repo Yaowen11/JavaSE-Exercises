@@ -1,5 +1,7 @@
 package se.io;
 
+import se.io.file.Directory;
+
 import java.io.File;
 import java.io.IOException;
 

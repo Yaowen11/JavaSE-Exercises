@@ -88,8 +88,8 @@ public class BufferToText {
 
     public static void main(String[] args) throws IOException {
         String utf8String = "缓冲器🌲 java nio";
-        String file = "data3.txt";
+        String file = "Logon.out";
         BufferToText bufferToText = new BufferToText(file);
-        System.out.println(bufferToText.buffer2TextByOutputDecoding().toString());
+        System.out.println(bufferToText.buffer2TextByOutputDecoding());
     }
 }
