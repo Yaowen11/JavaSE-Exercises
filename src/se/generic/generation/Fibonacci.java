@@ -1,6 +1,4 @@
-package se.generic;
-
-import se.generic.generation.Generator;
+package se.generic.generation;
 
 /**
  * @author zhangyaowen

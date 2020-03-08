@@ -1,4 +1,4 @@
-package se.collection;
+package se.collection.list;
 
 import java.util.Iterator;
 import java.util.List;
@@ -16,6 +16,5 @@ public class Lists {
     public static void iterMotion(List<String> a) {
         ListIterator<String> it = a.listIterator();
         b = it.hasNext();
-
     }
 }

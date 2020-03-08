@@ -1,4 +1,4 @@
-package se.collection;
+package se.collection.queue;
 
 import java.time.LocalDate;
 import java.util.PriorityQueue;

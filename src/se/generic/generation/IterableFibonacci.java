@@ -1,4 +1,4 @@
-package se.generic;
+package se.generic.generation;
 
 import java.util.HashMap;
 import java.util.Iterator;

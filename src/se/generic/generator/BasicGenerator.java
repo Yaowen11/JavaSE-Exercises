@@ -1,6 +1,6 @@
 package se.generic.generator;
 
-import se.generic.Fibonacci;
+import se.generic.generation.Fibonacci;
 import se.generic.generation.Coffee;
 import se.generic.generation.Generator;
 import java.lang.reflect.InvocationTargetException;

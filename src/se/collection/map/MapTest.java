@@ -1,6 +1,7 @@
-package se.collection;
+package se.collection.map;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,5 +23,6 @@ public class MapTest {
         mapTest.mapDump(staff);
         staff.remove("hubei");
         staff.forEach((k, v)->System.out.println("key=" + k + ", value=" + v));
+        Map<List<String>, List<Integer>> listListMap = new HashMap<>();
     }
 }

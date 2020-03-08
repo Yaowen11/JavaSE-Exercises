@@ -1,7 +1,5 @@
 package se.generic.generation;
 
-import se.generic.Fibonacci;
-
 import java.util.ArrayList;
 import java.util.Collection;
 

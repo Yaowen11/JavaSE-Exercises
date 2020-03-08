@@ -1,19 +1,9 @@
-package se.collection;
+package se.collection.list;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-class StringAddress {
-    private String s;
-    public StringAddress(String s) {
-        this.s = s;
-    }
-    @Override
-    public String toString() {
-        return super.toString() + " " + s;
-    }
-}
 /**
  * @author zhangyaowen
  */
