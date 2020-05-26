@@ -1,9 +1,11 @@
 package algorithm.leetcode.easy;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标
+ * 两数之和
  * @author zyw
  * @date 2020/5/24 20:59
  */
@@ -24,6 +26,18 @@ public class TwoIntSum {
                     return new int[]{i, l};
                 }
             }
+        }
+        return null;
+    }
+
+    private int[] official(int[] inputs, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < inputs.length; i++) {
+            int complement = target - inputs[i];
+            if (map.containsKey(complement)) {
+                return new int[] { map.get(complement), i};
+            }
+            map.put(inputs[i], i);
         }
         return null;
     }
