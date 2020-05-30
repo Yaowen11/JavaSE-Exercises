@@ -6,7 +6,7 @@ import java.util.Random;
  * @author z
  * @date 2020/5/28 17:15
  */
-public class FruitFunc {
+public class FruitFunc implements FruitFactory {
 
     public static FruitFunc fruitFactory = new FruitFunc();
 
@@ -20,8 +20,14 @@ public class FruitFunc {
                 return new Apple();
             case 1:
                 return new Orange();
+            case 2:
+                return new Hawthorn();
             default:
                 return new Gala();
         }
+    }
+    @Override
+    public Fruit next() {
+        return getFruit();
     }
 }

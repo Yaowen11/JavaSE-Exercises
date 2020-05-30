@@ -1,5 +1,7 @@
 package think.eleven;
 
+import think.Constant;
+
 import java.util.*;
 
 /**
@@ -25,5 +27,12 @@ public class Fruits {
         integers.addAll(Arrays.asList(moreInts));
         Collections.addAll(integers, 1,2,3,100);
         integers.forEach(System.out::print);
+    }
+    static Collection<Fruit> fruits() {
+        Collection<Fruit> fruits = new ArrayList<>();
+        for (int i = 0; i < Constant.TEN; i++) {
+            fruits.add(FruitFunc.fruitFactory.next());
+        }
+        return fruits;
     }
 }

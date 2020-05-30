@@ -1,6 +1,7 @@
 package think.ten;
 
 import java.util.Date;
+import java.util.Iterator;
 
 /**
  * @author zyw
@@ -70,6 +71,23 @@ public class Sequence {
         }
     }
 
+    public Iterator<Object> iterator() {
+        return new Iterator<>() {
+            private int index = 0;
+            @Override
+            public boolean hasNext() {
+                if (index < items.length) {
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public Object next() {
+                return items[index++];
+            }
+        };
+    }
     public static void main(String[] args) {
         int size = 10;
         Sequence sequence = new Sequence(size);
@@ -87,6 +105,11 @@ public class Sequence {
         while (!reverse.end()) {
             System.out.print(reverse.current() + " ");
             reverse.next();
+        }
+        System.out.println("iterator dump");
+        Iterator<Object> iterator = sequence.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
         }
     }
 }

@@ -4,12 +4,12 @@ package think.eleven;
  * @author z
  * @date 2020/5/28 16:59
  */
-public interface Fruit {
+public interface Fruit extends Comparable<Fruit> {
     /**
      * 味道
      * @return s
      */
-    String taste();
+    Taste taste();
 
     static enum  Taste {
         /**

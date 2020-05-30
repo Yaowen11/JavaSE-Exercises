@@ -12,7 +12,12 @@ public class Apple implements Fruit {
     }
 
     @Override
-    public String taste() {
-        return Taste.SWEET.toString();
+    public Taste taste() {
+        return Taste.SWEET;
+    }
+
+    @Override
+    public int compareTo(Fruit o) {
+        return Integer.compare(taste().ordinal(), o.taste().ordinal());
     }
 }

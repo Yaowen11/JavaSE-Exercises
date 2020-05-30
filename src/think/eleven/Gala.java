@@ -6,7 +6,12 @@ package think.eleven;
  */
 public class Gala implements Fruit {
     @Override
-    public String taste() {
-        return Taste.SWEET_AND_ACID.name();
+    public Taste taste() {
+        return Taste.ACID;
+    }
+
+    @Override
+    public int compareTo(Fruit o) {
+        return Integer.compare(taste().ordinal(), o.taste().ordinal());
     }
 }
