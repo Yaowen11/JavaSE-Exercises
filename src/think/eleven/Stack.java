@@ -28,9 +28,9 @@ public class Stack<T> {
     }
     public static void main(String[] args) {
 //        comp();
-        String express = "3 + 5 * 8 - 6";
+        String express = "32 + 231 * 29 - 100";
         compute(express);
-//        System.out.println(32 + 231 + 29 - 100 * 199 / 29);
+        System.out.println(32 + 231 * 29 - 100);
     }
     public static void dump() {
         Stack<Integer> stack = new Stack<>();
@@ -75,16 +75,23 @@ public class Stack<T> {
                 }
                 while (operatorLevel.get(s) <= operatorLevel.get(operators.peek())) {
                     numbers.push(computeInt(numbers.pop(), numbers.pop(), operators.pop()));
+                    if (operators.empty()) {
+                        break;
+                    }
                 }
                 operators.push(s);
             } else {
                 numbers.push(Integer.parseInt(s));
             }
+            System.out.println();
+            System.out.println(numbers);
+            System.out.println(operators);
         }
-        while (!operators.empty()) {
-            numbers.push(computeInt(numbers.pop(), numbers.pop(), operators.pop()));
-        }
+
         System.out.println(numbers);
+        int num1 = numbers.pop();
+        int result = computeInt(numbers.pop(), num1, operators.pop());
+        System.out.println(result);
     }
 
     private static int computeInt(Integer num1, Integer num2, String operator) {
