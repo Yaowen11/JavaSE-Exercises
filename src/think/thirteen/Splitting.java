@@ -1,5 +1,6 @@
 package think.thirteen;
 
+import java.text.DateFormat;
 import java.util.Arrays;
 
 /**
@@ -17,5 +18,17 @@ public class Splitting {
         split(" ");
         split("\\W+");
         split("n\\W+");
+        id("511381199112158176");
+        replace();
+    }
+
+    public static void id(String id) {
+        String birthday = id.substring(6, 14);
+        System.out.println(birthday);
+    }
+
+    public static void replace() {
+        System.out.println(Knights.replaceFirst("f\\w+", "located"));
+        System.out.println(Knights.replaceAll("shrubbery|tree|herring", "banana"));
     }
 }
