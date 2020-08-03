@@ -2,28 +2,19 @@ package think.fourteen;
 
 import java.util.ArrayList;
 
-/**
- * @author zyw
- * @date 2020/6/21 10:32
- */
 public class Staff extends ArrayList<Position> {
-
     public void add(String title, Person person) {
         add(new Position(title, person));
     }
-
     public void add(String... titles) {
         for (String title: titles) {
             add(new Position(title));
         }
     }
-
-    public Staff(String... titles) {
-        add(titles);
-    }
+    public Staff(String... titles) { add(titles); }
 
     public boolean positionAvailable(String title) {
-        for (Position position: this) {
+        for (Position position : this) {
             if (position.getTitle().equals(title) && position.getPerson() == Person.NULL) {
                 return true;
             }
@@ -31,10 +22,10 @@ public class Staff extends ArrayList<Position> {
         return false;
     }
 
-    public void fillPosition(String title, Person hire) {
-        for (Position position: this) {
+    public void fillPosition(String title, Person person) {
+        for (Position position : this) {
             if (position.getTitle().equals(title) && position.getPerson() == Person.NULL) {
-                position.setPerson(hire);
+                position.setPerson(person);
                 return;
             }
         }
@@ -42,12 +33,13 @@ public class Staff extends ArrayList<Position> {
     }
 
     public static void main(String[] args) {
-        Staff staff = new Staff("President", "CTO", "Marketing Manager", "Product Manager", "Project Lead", "Software Engineer",
-                "Software Engineer", "Software Engineer", "Software Engineer", "Test Engineer", "Technical Writer");
+        Staff staff = new Staff("President", "CTO", "Marketing Manager", "Product Manager",
+                "Project Lead", "Software Engineer", "Software Engineer", "Software Engineer",
+                "Software Engineer", "Test Engineer", "Technical Writer");
         staff.fillPosition("President", new Person("Me", "Last", "The Top, Lonely At"));
         staff.fillPosition("Project Lead", new Person("Janet", "Planner", "The Burbs"));
-        if (staff.positionAvailable("Soft Engineer")) {
-            staff.fillPosition("Software", new Person("Bob", "Coder", "Bright Light City"));
+        if (!staff.positionAvailable("Software Engineer")) {
+            staff.fillPosition("software Engineer", new Person("Bob", "Coder", "Bright Light City"));
         }
         System.out.println(staff);
     }

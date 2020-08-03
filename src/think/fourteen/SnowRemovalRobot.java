@@ -3,10 +3,6 @@ package think.fourteen;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author zyw
- * @date 2020/6/21 11:05
- */
 public class SnowRemovalRobot implements Robot {
     private String name;
     public SnowRemovalRobot(String name) { this.name = name; }
@@ -17,10 +13,9 @@ public class SnowRemovalRobot implements Robot {
     }
 
     @Override
-    public String mode() {
+    public String model() {
         return "SnowBot Series 11";
     }
-
     @Override
     public List<Operation> operations() {
         return Arrays.asList(
@@ -47,9 +42,10 @@ public class SnowRemovalRobot implements Robot {
                     }
                 },
                 new Operation() {
+
                     @Override
                     public String description() {
-                        return name + " can chip ice";
+                        return name + " can clear the roof";
                     }
 
                     @Override
@@ -59,6 +55,7 @@ public class SnowRemovalRobot implements Robot {
                 }
         );
     }
+
     public static void main(String[] args) {
         Robot.Test.test(new SnowRemovalRobot("Slusher"));
     }
