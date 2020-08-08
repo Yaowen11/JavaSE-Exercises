@@ -1,6 +1,7 @@
 package se.io.oio;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
@@ -18,16 +19,13 @@ public class BufferedInputFile {
         return builder.toString();
     }
     public static void main(String[] args) throws IOException {
-        String file = "worm.out";
+        String file = "prlog.http";
+        System.out.printf("all String:\n %s\n", read(file));
         BufferedInputFile bufferedInputFile = new BufferedInputFile();
         Map<Integer, String> lineMap = bufferedInputFile.readFileLineNumberMapContentUseInputStream(file);
-        lineMap.forEach((Integer number, String content)->{
-            System.out.println("line number: " + number + " content " + content);
-        });
+        lineMap.forEach((number, content)-> System.out.println("line number: " + number + " content " + content));
         lineMap = bufferedInputFile.readFileLineNumberMapContentUseReader(file);
-        lineMap.forEach((integer, s) -> {
-            System.out.println("line number: " + integer + " content " + s);
-        });
+        lineMap.forEach((integer, s) -> System.out.println("line number: " + integer + " content " + s));
     }
 
     /**

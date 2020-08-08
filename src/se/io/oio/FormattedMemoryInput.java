@@ -2,7 +2,6 @@ package se.io.oio;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
-import java.io.EOFException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
@@ -11,15 +10,9 @@ import java.nio.charset.StandardCharsets;
  */
 public class FormattedMemoryInput {
     public static void main(String[] args) throws IOException {
-        try {
-            DataInputStream in = new DataInputStream(
-                    new ByteArrayInputStream(
-                            BufferedInputFile.read("preferences_tree.xml").getBytes(StandardCharsets.UTF_8)));
-            while (true) {
-                System.out.println((char)in.readByte());
-            }
-        } catch (EOFException e) {
-            System.out.println("End of stream");
+        DataInputStream in = new DataInputStream(new ByteArrayInputStream(BufferedInputFile.read("preferences_tree.xml").getBytes(StandardCharsets.UTF_8)));
+        while (in.available() != 0) {
+            System.out.print((char) in.readByte());
         }
     }
 }
