@@ -1,6 +1,5 @@
 package tools;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -14,6 +13,6 @@ public class UseDatetime {
         System.out.println(localDateTime);
         Timestamp timestamp = Timestamp.valueOf(localDateTime);
         System.out.println(timestamp);
-        System.out.println(timestamp.valueOf(localDateTime.format(DATE_TIME_FORMATTER)));
+        System.out.println(Timestamp.valueOf(localDateTime.format(DATE_TIME_FORMATTER)));
     }
 }
