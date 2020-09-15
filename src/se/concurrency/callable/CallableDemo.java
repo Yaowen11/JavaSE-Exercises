@@ -14,6 +14,12 @@ public class CallableDemo {
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newCachedThreadPool();
         ArrayList<Future<String>> futures = new ArrayList<>();
+        Future<String> future1 = executorService.submit(new TaskWithResult(100));
+        try {
+            System.out.println(future1.get());
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
         for (int i = 0; i < init; i++) {
             futures.add(executorService.submit(new TaskWithResult(i)));
         }
