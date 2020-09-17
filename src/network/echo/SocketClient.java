@@ -1,10 +1,7 @@
 package network.echo;
 
 import java.io.*;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.SocketAddress;
+import java.net.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
@@ -30,38 +27,31 @@ public class SocketClient {
     public static void main(String[] args) {
         int process = Runtime.getRuntime().availableProcessors();
         int basePort = 20000;
-        ExecutorService executor = Executors.newFixedThreadPool(process);
         SocketClient socketClient = new SocketClient();
+        ExecutorService executor = Executors.newFixedThreadPool(process);
         for (int i = 0; i < process; i++) {
             executor.execute(socketClient.run(socketClient.randSocketAddress(), basePort + i));
         }
     }
 
     public Runnable run(InetSocketAddress serverAddress, int port) {
-        return new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    try(Socket socket = new Socket(serverAddress.getHostName(), serverAddress.getPort(),
-                            InetAddress.getByName(host), port)) {
-                        if (socket.isConnected()) {
-                            InetSocketAddress serverAddr = (InetSocketAddress) socket.getRemoteSocketAddress();
-                            System.out.printf("connection success server address: %s, port: %d\n", serverAddr.getAddress(), serverAddr.getPort());
-                            try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()))) {
-                                bufferedWriter.write("hi! current time " + LocalDateTime.now());
-                                bufferedWriter.flush();
-                                bufferedWriter.write("bye");
-                                String serverOutput;
-                                while ((serverOutput = bufferedReader.readLine()) != null) {
-                                    System.out.println("server out: " + serverOutput);
-                                }
-                            }
+        return () -> {
+            try (Socket socket = new Socket(serverAddress.getHostName(), serverAddress.getPort(), InetAddress.getByName(host), port)) {
+                if (socket.isConnected()) {
+                    InetSocketAddress serverAddr = (InetSocketAddress) socket.getRemoteSocketAddress();
+                    System.out.printf("connection success server address: %s, port: %d\n", serverAddr.getAddress(), serverAddr.getPort());
+                    try (BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                        PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()))) {
+                        String serverOutput;
+                        while (((serverOutput = reader.readLine())) != null) {
+                            System.out.println("server out: " + serverOutput);
+                            writer.println("hi! current time " + LocalDateTime.now());
+                            writer.flush();
                         }
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         };
     }
