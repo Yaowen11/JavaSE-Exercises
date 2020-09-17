@@ -1,6 +1,5 @@
 package think.seventeen;
 
-import kotlin.collections.AbstractMap;
 
 import java.util.*;
 
@@ -55,6 +54,10 @@ public class SimpleHashMap<K, V> extends AbstractMap<K, V> {
     }
 
     @Override
+    public Set<Entry<K, V>> entrySet() {
+        return getEntries();
+    }
+
     public Set<Map.Entry<K, V>> getEntries() {
         Set<Map.Entry<K, V>> set = new HashSet<>();
         for (LinkedList<MapEntry<K, V>> bucket : buckets) {

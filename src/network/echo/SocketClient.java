@@ -1,7 +1,10 @@
 package network.echo;
 
 import java.io.*;
-import java.net.*;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
@@ -15,7 +18,7 @@ public class SocketClient {
 
     private final String host = "localhost";
 
-    private List<InetSocketAddress> socketAddressList = List.of(
+    private final List<InetSocketAddress> socketAddressList = List.of(
             new InetSocketAddress(host, 10000),
             new InetSocketAddress(host, 10001),
             new InetSocketAddress(host, 10002),
@@ -27,8 +30,8 @@ public class SocketClient {
     public static void main(String[] args) {
         int process = Runtime.getRuntime().availableProcessors();
         int basePort = 20000;
-        SocketClient socketClient = new SocketClient();
         ExecutorService executor = Executors.newFixedThreadPool(process);
+        SocketClient socketClient = new SocketClient();
         for (int i = 0; i < process; i++) {
             executor.execute(socketClient.run(socketClient.randSocketAddress(), basePort + i));
         }
@@ -36,17 +39,17 @@ public class SocketClient {
 
     public Runnable run(InetSocketAddress serverAddress, int port) {
         return () -> {
-            try (Socket socket = new Socket(serverAddress.getHostName(), serverAddress.getPort(), InetAddress.getByName(host), port)) {
+            try(Socket socket = new Socket(serverAddress.getHostName(), serverAddress.getPort(), InetAddress.getByName(host), port)) {
                 if (socket.isConnected()) {
                     InetSocketAddress serverAddr = (InetSocketAddress) socket.getRemoteSocketAddress();
                     System.out.printf("connection success server address: %s, port: %d\n", serverAddr.getAddress(), serverAddr.getPort());
-                    try (BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                        PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()))) {
+                    try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                        PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true)) {
+                        writer.println("client say hi! current time " + LocalDateTime.now());
                         String serverOutput;
-                        while (((serverOutput = reader.readLine())) != null) {
+                        while ((serverOutput = bufferedReader.readLine()) != null) {
                             System.out.println("server out: " + serverOutput);
-                            writer.println("hi! current time " + LocalDateTime.now());
-                            writer.flush();
+                            writer.println("bye");
                         }
                     }
                 }

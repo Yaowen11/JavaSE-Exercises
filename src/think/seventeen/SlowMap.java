@@ -1,6 +1,5 @@
 package think.seventeen;
 
-import kotlin.collections.AbstractMap;
 
 import java.util.*;
 
@@ -44,11 +43,14 @@ public class SlowMap<K, V> extends AbstractMap<K, V> {
     }
 
     @Override
+    public Set<Entry<K, V>> entrySet() {
+        return getEntries();
+    }
+
     public Set<Map.Entry<K, V>> getEntries() {
         return get();
     }
 
-    @Override
     public int getSize() {
         return keys.size();
     }

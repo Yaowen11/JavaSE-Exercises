@@ -18,22 +18,21 @@ public class EchoClient {
     }
 
     public void talk() throws IOException {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-             PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
-             BufferedReader localReader = new BufferedReader(new InputStreamReader(System.in))
-        ) {
-            String msg;
-            while ((msg = localReader.readLine()) != null) {
-                writer.println(msg);
-                System.out.println(reader.readLine());
-                if ("bye".equals(msg)) {
-                    break;
-                }
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
+        BufferedReader localReader = new BufferedReader(new InputStreamReader(System.in));
+        String msg;
+        while ((msg = localReader.readLine()) != null) {
+            System.out.println("stand io input: " + msg);
+            writer.println(msg);
+            System.out.println(reader.readLine());
+            if ("bye".equals(msg)) {
+                break;
             }
         }
     }
 
     public static void main(String[] args) throws IOException {
-        new EchoClient(new InetSocketAddress("localhost", 8000), 10000).talk();
+        new EchoClient(new InetSocketAddress("localhost", 8000), 11222).talk();
     }
 }

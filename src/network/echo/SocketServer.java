@@ -14,8 +14,8 @@ public class SocketServer {
     public static void main(String[] args) {
         int availableProcess = Runtime.getRuntime().availableProcessors();
         int basePort = 10000;
-        SocketServer socketServer = new SocketServer();
         ExecutorService executor = Executors.newFixedThreadPool(availableProcess);
+        SocketServer socketServer = new SocketServer();
         for (int i = 0; i < availableProcess; i++) {
             executor.execute(socketServer.run(basePort + i));
         }
@@ -23,28 +23,30 @@ public class SocketServer {
 
     public Runnable run(int port) {
         return () -> {
-            try(ServerSocket serverSocket = new ServerSocket(port)) {
+            try {
+                ServerSocket serverSocket = new ServerSocket(port);
                 System.out.printf("server address: %s port: %d\n", serverSocket.getInetAddress().getHostName(), serverSocket.getLocalPort());
                 while (true) {
                     Socket socket = serverSocket.accept();
-                    System.err.printf(
+                    System.out.printf(
                             "new connection client remote server:%s, address %s, port:%s\n",
                             socket.getRemoteSocketAddress(),
                             socket.getInetAddress().getHostAddress(),
                             socket.getPort()
                     );
-                    try (BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                         PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()))) {
-                        String clientSay;
-                        while ((clientSay = reader.readLine()) != null) {
-                            if ("bye".equals(clientSay)) {
-                                writer.println("good bye!");
-                                writer.flush();
-                                socket.close();
-                                break;
+                    if (socket.isConnected()) {
+                        try (BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                             PrintWriter writer = new PrintWriter((new OutputStreamWriter(socket.getOutputStream())), true)) {
+                            writer.println("server hi!");
+                            String clientSay;
+                            while ((clientSay = reader.readLine()) != null) {
+                                if ("bye".equals(clientSay)) {
+                                    writer.println("server say good bye!");
+                                    socket.close();
+                                }
+                                writer.println("client said: '" + clientSay + "'");
+                                System.out.println("client say: " + clientSay);
                             }
-                            writer.println("your said: '" + clientSay + "'");
-                            writer.flush();
                         }
                     }
                 }
