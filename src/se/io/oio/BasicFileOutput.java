@@ -1,7 +1,5 @@
 package se.io.oio;
 
-import se.io.oio.BufferedInputFile;
-
 import java.io.*;
 
 /**
@@ -19,7 +17,7 @@ public class BasicFileOutput {
                 out.println(lineCount++ + ": " + s);
             }
             out.flush();
-            System.out.println(BufferedInputFile.read(file));
+//            System.out.println(BufferedInputFile.read(file));
         }
     }
 

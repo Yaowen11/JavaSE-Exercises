@@ -89,7 +89,7 @@ public class BufferToText {
     public static void main(String[] args) throws IOException {
         String utf8String = "缓冲器🌲 java nio";
         String file = "Logon.out";
-        BufferToText bufferToText = new BufferToText(file);
+        BufferToText bufferToText = new BufferToText(utf8String);
         System.out.println(bufferToText.buffer2TextByOutputDecoding());
     }
 }
