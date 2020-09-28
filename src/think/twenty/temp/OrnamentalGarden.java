@@ -1,5 +1,9 @@
 package think.twenty.temp;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FilterInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -81,6 +85,7 @@ public class OrnamentalGarden {
         TimeUnit.SECONDS.sleep(3);
         Entrance.cancel();
         executorService.shutdown();
+        var file = new BufferedInputStream(new FileInputStream("test.file"));
         if (!executorService.awaitTermination(250, TimeUnit.MILLISECONDS)) {
             System.out.println("Some tasks were not terminated!");
         }
